@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os
 import sys
 
 from gi.repository import Gtk, Gio, WebKit
@@ -41,7 +42,10 @@ class LooseleafApp(Gtk.Application):
             
             # Set up our WebView
             self.webview = WebKit.WebView()
-            self.webview.load_string("<h1>Hello, World!</h1>", "text/html", "UTF-8", "")
+            #self.webview.load_string("<h1>Hello, World!</h1>", "text/html", "UTF-8", "")
+            exe_dir = os.path.dirname(os.path.realpath(__file__))
+            html_path = os.path.join(exe_dir, "default.html")
+            self.webview.load_uri("file://%s" % html_path)
             hbox.pack_start(self.webview, True, True, 0)
             
         def on_button1_clicked(self, widget):
